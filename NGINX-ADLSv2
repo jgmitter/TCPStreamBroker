@@ -1,19 +1,4 @@
-Skip to content
- 
-Search or jump to…
 
-Pull requests
-Issues
-Marketplace
-Explore
- @jgmitter Sign out
-1
-0 0 jgmitter/nginx-vmss
- Code  Issues 0  Pull requests 0  Projects 0  Wiki  Insights  Settings
-nginx-vmss/nginx.conf
-@jgmitter jgmitter Update nginx.conf
-612745e  2 hours ago
-145 lines (116 sloc)  4.33 KB
     
 #######################################################################
 ##Example configuration file for NGINX 1.12.1 - Proxy for Azure Storage
@@ -159,16 +144,5 @@ stream {
 #        ssl_preread on;
 #    }
 #}       
-© 2019 GitHub, Inc.
-Terms
-Privacy
-Security
-Status
-Help
-Contact GitHub
-Pricing
-API
-Training
-Blog
-About
+
 Press h to open a hovercard with more details.
