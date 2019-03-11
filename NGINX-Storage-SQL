@@ -1,0 +1,64 @@
+ upstream eventhub_https {
+      server contoso.servicebus.windows.net:443;
+   }
+
+   upstream eventhub_handshake {
+	  server contoso.servicebus.windows.net:5671;
+   }
+   
+   server {
+      listen 443;
+      proxy_pass eventhub_https;
+   }
+   
+   server {
+	  listen 5671;
+	  proxy_pass eventhub_amqps;
+   }
+}
+
+
+
+stream {
+
+   tcp_nodelay on;
+
+    map $ssl_preread_server_name $name {
+        adlsnginx.blob.core.windows.net azure_blob;
+        adlsnginx.file.core.windows.net azure_file;
+        adlsnginx.table.core.windows.net azure_table;
+        adlsnginx.queue.core.windows.net azure_queue;
+    }
+
+     upstream sql {
+        server gbbtestserver.database.windows.net:1433;
+   }
+
+    upstream azure_blob {
+        server adlsnginx.blob.core.windows.net:443;
+    }
+
+    upstream azure_file {
+        server adlsnginx.file.core.windows.net:443;
+    }
+
+    upstream azure_table {
+        server adlsnginx.table.core.windows.net:443;
+    }
+
+    upstream azure_queue {
+        server adlsnginx.queue.core.windows.net:443;
+    }
+
+    server {
+        listen 443;
+        proxy_pass $name;
+        ssl_preread on;
+    }
+
+       server {
+      listen 1433;
+      proxy_pass sql;
+      proxy_connect_timeout 1s; # detect failure quickly
+    }
+}
